@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const port = process.env.PORT || 3000;
 
 const uri = process.env.ATLAS_PASSWORD;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
@@ -26,4 +27,4 @@ app.use('/products', productRouter);
 app.use('/orders', orderRouter);
 app.use('/auth', authRouter);
 
-app.listen(3000, () => console.log('The server is working!!'));
+app.listen(port, () => console.log(`The server is working on port ${port}!!`));
