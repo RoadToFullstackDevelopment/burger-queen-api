@@ -7,14 +7,14 @@ require('dotenv').config();
 const port = process.env.PORT || 3000;
 
 const uri = process.env.ATLAS_PASSWORD;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).catch(err => {
+    console.log(err);
+});
 
 const connection = mongoose.connection;
 connection.on('error', (error) => console.error(error));
 connection.once('open', () => console.log('MongoDB database connected!'))
-connection.connect(uri, function(err, db) {
-    db.close();
- });
+
 
 app.use(express.json());
 app.use(cors());
