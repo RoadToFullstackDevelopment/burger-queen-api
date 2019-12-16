@@ -12,6 +12,9 @@ mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedT
 const connection = mongoose.connection;
 connection.on('error', (error) => console.error(error));
 connection.once('open', () => console.log('MongoDB database connected!'))
+connection.connect(uri, function(err, db) {
+    db.close();
+ });
 
 app.use(express.json());
 app.use(cors());
