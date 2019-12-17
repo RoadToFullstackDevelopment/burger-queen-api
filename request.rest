@@ -7,10 +7,11 @@ POST http://localhost:3000/products
 Content-Type: application/json
 
 {
-    "name": "Refrigerante 750ml",
-    "image": "https://drive.google.com/file/d/1TRUXbDw3trFDto2W4_VYB2RXrQAlMYuu/view?usp=sharing",
-    "price": 10.00,
-    "restOfTheDay": true
+    "name": "Queijo",
+    "image": "https://drive.google.com/file/d/1Niws4d0UEruv4fiR4DsHVmVHoyTEgwdU/view?usp=sharing",
+    "price": 1.00,
+    "restOfTheDay": true,
+    "complement": true
 }
 
 ###
