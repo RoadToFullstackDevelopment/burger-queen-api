@@ -17,7 +17,12 @@ router.post('/', async (req, res) => {
     const order = new Order({
     id: mongoose.Schema.Types.ObjectId,
     product: req.body.productid,
-    quantity: req.body.quantity
+    quantity: req.body.quantity,
+    waiterName: req.body.waiterName,
+    clientName: req.body.clientName,
+    timePreparation: req.body.timePreparation,
+    orderReady: req.body.orderReady,
+    orderServed: req.body.orderServed
   })
 
   try {

@@ -12,6 +12,14 @@ const userSchema = new mongoose.Schema({
         unique: true,
         required: true,
         min: 6
+    },
+    kitchen: {
+      type: Boolean,
+      required: true
+    },
+    salon: {
+      type: Boolean,
+      required: true
     }
 });
 

@@ -10,6 +10,21 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         default: 1,
         required: true
+    },
+    waiterName: {
+        type: String
+    },
+    clientName: {
+        type: String
+    },
+    orderReady: {
+        type: Boolean
+    },
+    timePreparation: {
+        type: Number
+    },
+    orderServed: {
+        type: Boolean
     }
 });
 

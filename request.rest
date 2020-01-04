@@ -74,8 +74,10 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "email": "lele@email.com",
-    "password": "senhadalele"
+    "email": "nana@email.com",
+    "password": "nana12345",
+    "kitchen": false,
+    "salon": false
 }
 
 ###
@@ -94,7 +96,7 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/users/5df7dda24c072a1158767726
+DELETE http://localhost:3000/users/5df944d8044f63130379a33b
 
 ###
 
@@ -106,8 +108,13 @@ POST http://localhost:3000/orders
 Content-Type: application/json
 
 {
-    "productid": "5df5444f0eb9b606b6a24e8e",
-    "quantity": 3
+    "productid": "5df545730eb9b606b6a24e91",
+    "quantity": 1,
+    "waiterName": "Lala",
+    "clientName": "Zezé",
+    "timePreparation": 5,
+    "orderReady": true,
+    "orderServed": true
 }
 
 ###
@@ -126,16 +133,18 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/orders/5df68ec10e32750e14653807
+DELETE http://localhost:3000/orders/5df01073a761ab241c9b7d54
 
 ###
 
-POST http://localhost:3000/users/login
+POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "email": "festa@email.com",
-    "password": "123"
+    "email": "ana@email.com",
+    "password": "ana12345",
+    "kitchen": true,
+    "salon": false
 }
 
 ###
@@ -152,7 +161,8 @@ POST  http://localhost:3000/auth
 
 {
     "email": "ana@email.com",
-    "password": "ana12345"
+    "password": "ana12345",
+    "kitchen": true
 }
 
 ###
