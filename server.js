@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 const uri = process.env.ATLAS_PASSWORD;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).catch(err => {
@@ -21,13 +21,13 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const userRouter = require('./routes/users.route');
-const productRouter = require('./routes/products.route');
-const orderRouter = require('./routes/orders.route');
-const authRouter = require('./routes/auth.route');
-app.use('/users', userRouter);
-app.use('/products', productRouter);
-app.use('/orders', orderRouter);
-app.use('/auth', authRouter);
+const userRouter = require('./routes/api/users.route');
+const productRouter = require('./routes/api/products.route');
+const orderRouter = require('./routes/api/orders.route');
+// const authRouter = require('./routes/auth.route');
+app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
+app.use('/api/orders', orderRouter);
+// app.use('/auth', authRouter);
 
 app.listen(port, () => console.log(`The server is working on port ${port}!!`));
