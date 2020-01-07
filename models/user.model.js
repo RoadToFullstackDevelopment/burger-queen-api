@@ -14,12 +14,10 @@ const userSchema = new mongoose.Schema({
         min: 6
     },
     kitchen: {
-      type: Boolean,
-      required: true
+      type: Boolean
     },
     salon: {
-      type: Boolean,
-      required: true
+      type: Boolean
     }
 });
 
