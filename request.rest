@@ -205,3 +205,22 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:5000/api/users/5e149a8fe45de2001752a784
+
+###
+
+GET http://localhost:5000/api/products
+
+###
+
+GET http://localhost:5000/api/products/5df92f390c53d90d37d057d6
+
+###
+
+PUT http://localhost:5000/api/products/5df92f390c53d90d37d057d6
+Content-Type: application/json
+
+{
+    "name": "Queijo",
+    "image": "https://doc-0c-30-docs.googleusercontent.com/docs/securesc/pmlb6nrb2kf8v25br08gsgdrcftiqlo0/mvrh7qu3vsgq91aede5hqbmo7vi8qfte/1578513600000/07195466406224765022/07195466406224765022/1Niws4d0UEruv4fiR4DsHVmVHoyTEgwdU?e=view&authuser=0",
+    "price": 1
+}
