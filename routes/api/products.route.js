@@ -3,6 +3,7 @@ const router = express.Router();
 const Product = require('../../models/product.model');
 const mongoose = require('mongoose');
 
+
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find()
@@ -15,10 +16,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const product = new Product({
     name: req.body.name,
-    image: req.body.image,
     price: req.body.price,
-    coffee: req.body.coffee,
-    restOfTheDay: req.body.restOfTheDay,
+    kindOfProduct: req.body.kindOfProduct,
     complement: req.body.complement
   })
   try {
@@ -36,10 +35,6 @@ router.get('/:productid', getProduct, async (req, res) => {
 router.put('/:productid', getProduct, async (req, res) => {
   if (req.body.name !== null) {
     res.product.name = req.body.name
-  }
-
-  if (req.body.image !== null) {
-    res.product.image = req.body.image
   }
 
   if (req.body.price !== null) {

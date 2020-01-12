@@ -29,10 +29,10 @@ app.use((req, res, next) => {
 const userRouter = require('./routes/api/users.route');
 const productRouter = require('./routes/api/products.route');
 const orderRouter = require('./routes/api/orders.route');
-// const authRouter = require('./routes/auth.route');
+
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
-// app.use('/auth', authRouter);
+
 
 app.listen(port, () => console.log(`The server is working on port ${port}!!`));

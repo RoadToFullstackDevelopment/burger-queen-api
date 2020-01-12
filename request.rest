@@ -1,5 +1,4 @@
-
-GET http://localhost:5000/api/orders
+GET http://localhost:5000/api/products
 
 ###
 
@@ -8,219 +7,26 @@ Content-Type: application/json
 
 {
     "name": "Queijo",
-    "image": "https://drive.google.com/file/d/1Niws4d0UEruv4fiR4DsHVmVHoyTEgwdU/view?usp=sharing",
     "price": 1.00,
-    "restOfTheDay": true,
+    "kindOfProduct": "rest-of-the-day",
     "complement": true
 }
 
 ###
 
-GET http://localhost:3000/products/5df5465e0eb9b606b6a24e95
+GET http://localhost:5000/api/products/5df545dc0eb9b606b6a24e92
 
 ###
 
-PUT http://localhost:3000/products/5df5465e0eb9b606b6a24e95
-Content-Type: application/x-www-form-urlencoded
-
-{
-    "name": "Hambúrguer duplo de carne bovina",
-    "image": "https://drive.google.com/file/d/1BGRoSpdW895Lm0v7SczD8wZurUKyI-A4/view?usp=sharing",
-    "price": 15.00
-}
-
-###
-
-DELETE http://localhost:3000/products/5df0214421fd0d26cd5ab543
-
-###
-
-PUT   http://localhost:3000/products/5df5465e0eb9b606b6a24e95
+PUT http://localhost:5000/api/products/5df545730eb9b606b6a24e91
 Content-Type: application/json
 
 {
-    "name": "Novo nome",
-    "image": "jjkljkljkljkjkjkjkj;l",
-    "price": 2.00
+    "name": "Café americano",
+    "price": 5.00,
+    "kindOfProduct": "breakfast"
 }
 
 ###
 
-DELETE http://localhost:3000/products/5df5465e0eb9b606b6a24e95
-
-###
-
-POST http://localhost:3000/auth
-Content-Type: application/json
-
-{
-    "email": "zezinho@email.com",
-    "password": "zezinho123"
-}
-
-###
-
-GET http://localhost:5000/api/products
-
-###
-
-GET http://localhost:3000/users
-Authorization: Bearer
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzY1MjQ3NTl9.oe4YsY5NHQOHifxSg0z5DZU40C1hHmvDsQWS2jCIV9Q
-
-###
-
-POST http://localhost:3000/users
-Content-Type: application/json
-
-{
-    "email": "nana@email.com",
-    "password": "nana12345",
-    "kitchen": false,
-    "salon": false
-}
-
-###
-
-GET http://localhost:3000/users/5df158657a7a0f0e198cd90d
-
-###
-
-PUT http://localhost:3000/users/5defe6c7c0f7011b8a61ddb8
-Content-Type: application/json
-
-{
-    "email": "email@email.com",
-    "password": "senhanova1234"
-}
-
-###
-
-DELETE http://localhost:3000/users/5df944d8044f63130379a33b
-
-###
-
-GET http://localhost:3000/orders
-
-###
-
-POST http://localhost:3000/orders
-Content-Type: application/json
-
-{
-    "productid": "5df545730eb9b606b6a24e91",
-    "quantity": 1,
-    "waiterName": "Lala",
-    "clientName": "Zezé",
-    "timePreparation": 5,
-    "orderReady": true,
-    "orderServed": true
-}
-
-###
-
-GET http://localhost:3000/orders/5df68ec10e32750e14653807
-
-###
-
-PUT http://localhost:3000/orders/5df68ec10e32750e14653807
-Content-Type: application/json
-
-{
-    "productid": "5df5444f0eb9b606b6a24e8e",
-    "quantity": 5
-}
-
-###
-
-DELETE http://localhost:3000/orders/5df01073a761ab241c9b7d54
-
-###
-
-POST http://localhost:3000/users
-Content-Type: application/json
-
-{
-    "email": "ana@email.com",
-    "password": "ana12345",
-    "kitchen": true,
-    "salon": false
-}
-
-###
-
-GET http://localhost:5000/api/users
-
-###
-
-DELETE http://localhost:3000/users/5df79c1cbc19640ba596886a
-
-###
-
-POST  http://localhost:3000/auth
-
-{
-    "email": "ana@email.com",
-    "password": "ana12345",
-    "kitchen": true
-}
-
-###
-
-POST http://localhost:3000/users/login
-Content-Type: application/json
-
-{
-   "email": "mariazinha@email.com",
-    "password": "senha123456" 
-}
-
-###
-
-POST  http://localhost:3000/auth
-Content-Type: application/json
-
-{
-   "email": "mariazinha@email.com",
-    "password": "senha123456" 
-}
-
-
-GET http://localhost:5000/api/products
-
-###
-
-GET http://localhost:5000/api/users
-
-###
-
-POST http://localhost:5000/api/users
-Content-Type: application/json
-
-{
-    "email": "klklklkkl@klklklklk",
-    "password": "nmnmnmnmnmnmnmnmnm"
-}
-
-###
-
-DELETE http://localhost:5000/api/users/5e149a8fe45de2001752a784
-
-###
-
-GET http://localhost:5000/api/products
-
-###
-
-GET http://localhost:5000/api/products/5df92f390c53d90d37d057d6
-
-###
-
-PUT http://localhost:5000/api/products/5df92f390c53d90d37d057d6
-Content-Type: application/json
-
-{
-    "name": "Queijo",
-    "image": "https://doc-0c-30-docs.googleusercontent.com/docs/securesc/pmlb6nrb2kf8v25br08gsgdrcftiqlo0/mvrh7qu3vsgq91aede5hqbmo7vi8qfte/1578513600000/07195466406224765022/07195466406224765022/1Niws4d0UEruv4fiR4DsHVmVHoyTEgwdU?e=view&authuser=0",
-    "price": 1
-}
+DELETE http://localhost:5000/api/products/5df92f390c53d90d37d057d6

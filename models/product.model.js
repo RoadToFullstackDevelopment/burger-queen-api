@@ -5,19 +5,12 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-        required: true
-    },
     price: {
         type: Number,
         required: true
     },
-    coffee: {
-        type: Boolean
-    },
-    restOfTheDay: {
-        type: Boolean
+    kindOfProduct: {
+        type: String
     },
     complement: {
         type: Boolean
