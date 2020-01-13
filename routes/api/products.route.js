@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../../models/product.model');
 const mongoose = require('mongoose');
+const multer = require('multer');
+const multerConfig = require('../../config/multer');
 
 
 router.get('/', async (req, res) => {
@@ -13,7 +15,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', multer(multerConfig).single('file'), async (req, res) => {
+  console.log(req.file);
   const product = new Product({
     name: req.body.name,
     price: req.body.price,
