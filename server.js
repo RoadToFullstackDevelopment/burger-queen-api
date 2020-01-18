@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 const userRouter = require('./routes/api/users.route');
 const productRouter = require('./routes/api/products.route');
 const orderRouter = require('./routes/api/orders.route');
+const uploadRouter = require('./routes/api/uploads.route');
 
 const uri = process.env.ATLAS_PASSWORD;
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).catch(err => {
@@ -41,6 +42,7 @@ app.use((req, res, next) => {
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/uploads', uploadRouter);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');

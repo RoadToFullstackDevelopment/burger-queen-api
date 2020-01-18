@@ -126,7 +126,7 @@ router.get('/:productid', (req, res, next) => {
     });
 });
 
-router.put('/:productid', auth, (req, res, next) => {
+router.put('/:productid', (req, res, next) => {
   const id = req.params.productid
   const updateOps = {}
   for (const ops of req.body) {
