@@ -11,7 +11,7 @@ Essa API, que será parte do projeto Burger Queen, foi criada com:
 * NodeJS
 * JWT (Jason Web Token - autenticação)
 * bcrypt (encriptação de senhas)
-* multer (armazenamento de imagens no servidor)
+* multer e Cloudinary (armazenamento de imagens)
 
 Os testes com a API foram realizados com uma extensão do Visual Studio Code chamada REST Client e com o programa Postman.
 
