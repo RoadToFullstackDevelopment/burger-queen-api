@@ -1,95 +1,130 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/user.model');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-router.get('/', async (req, res) => {
-    try {
-        const users = await User.find()
-        res.json(users)
-    } catch (err) {
-        res.status(500).json({ message: err.message })
-    }
-});
-
-router.get('/', authenticateToken, (req, res) => {
-  res.json(users.filter(user => user.email === req.user.email))
-})
-
-router.post('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
-    const user = new User({
-    email: req.body.email,
-    password: req.body.password,
-    kitchen: req.body.kitchen,
-    salon: req.body.salon
-  })
-    const newUser = await user.save()
-    res.status(201).json(newUser)
+      const users = await User.find()
+      res.json(users)
   } catch (err) {
-    res.status(400).json({ message: err.message })
-  }
-});
-
-router.get('/:uid', getUser, async (req, res) => {
-    res.json(res.user)
-});
-
-router.put('/:uid', getUser, async (req, res) => {
-    if (req.body.email !== null) {
-      res.user.email = req.body.email
-    }
-  
-    if (req.body.password !== null) {
-      res.user.password = req.body.password
-    }
-    try {
-      const updatedUser = await res.user.save()
-      res.json(updatedUser)
-    } catch {
-      res.status(400).json({ message: err.message })
-    }
-  
-});
-
-router.delete('/:uid', getUser, async (req, res) => {
-    try {
-      await res.user.remove()
-      res.json({ message: 'Deleted This User' })
-    } catch(err) {
       res.status(500).json({ message: err.message })
-    }
-});
-
-async function getUser (req, res, next) {
-    let user
-    try {
-      user = await User.findById(req.params.uid)
-      if (user == null) {
-        return res.status(404).json({ message: 'Cant find user'})
-      }
-    } catch(err){
-      return res.status(500).json({ message: err.message })
-    }
-  
-    res.user = user
-    next()
-}
-
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization']
-  const token = authHeader && authHeader.split(' ')[1]
-  if (token === null) {
-    return res.sendStatus(401)
   }
-  jwt.verify(token, process.env.ACCESS_SECRET_TOKEN, function (err, user) {
-    if (err) {
-      return res.sendStatus(403);
+});
+  
+router.post('/register', (req, res, next) => {
+  User.find({email: req.body.email})
+  .exec()
+  .then(user => {
+    if (user.length >= 1) {
+      return res.status(409).json({
+        message: 'This email exists!'
+      })
+    } 
+    else {
+      bcrypt.hash(req.body.password, 10, (err, hash) => {
+        if (err) {
+          return res.status(500).json({
+            error: err
+          })
+        }
+        else {
+          const user = new User({
+            _id: new mongoose.Types.ObjectId(),
+            email: req.body.email,
+            password: hash,
+            kitchen: req.body.kitchen,
+            salon: req.body.salon
+          })
+          user
+          .save()
+          .then(result => {
+            console.log(result)
+            res.status(201).json({message: 'User created!'})
+          })
+          .catch(err => {
+            console.log(err)
+            res.status(500).json({error: err})
+          });
+        }
+      })
     }
-    req.user = user
-    next()
   })
-}
+}); 
+
+router.post('/login', (req, res, next) => {
+  User.find({email: req.body.email})
+  .exec()
+  .then(users => {
+    if (users.length < 1){
+      return res.status(401).json({
+        message: 'This authentication has failed!'
+      })
+    }
+    bcrypt.compare(req.body.password, users[0].password, (err, result) => {
+      if (err) {
+        return res.status(401).json({
+          message: 'This authentication has failed!'
+        })
+      }
+      if (result) {
+        const token = jwt.sign({
+          email: users[0].email,
+          usersId: users[0]._id
+        }, 
+        process.env.JWT_KEY,
+          {
+            expiresIn: '1h'
+          }
+
+        )
+        return res.status(200).json(
+          {
+            message: 'This authentication has succeed!',
+            token: token
+          })
+      }
+      res.status(401).json({
+        message: 'This authentication has failed!'
+      })
+    })
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json({error: err})
+  });
+})
+  
+  
+  router.get('/:uid', (req, res, next) => {
+    res.status(201).json({
+        message: 'This is a special ID',
+        uid: req.params.uid
+      })
+  });
+  
+  router.put('/:uid', (req, res, next) => {
+    res.status(200).json({
+      message: 'This user was updated',
+      uid: req.params.uid
+    })
+  });
+  
+  router.delete('/:uid', (req, res, next) => {
+    User.deleteOne({_id: req.params.uid})
+    .exec()
+    .then(result => {
+      res.status(200).json({
+        message: 'User deleted!'
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({error: err})
+    });
+  });
 
 module.exports = router;

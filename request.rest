@@ -1,32 +1,9 @@
-GET http://localhost:5000/api/products
-
-###
-
 POST http://localhost:5000/api/products
 Content-Type: application/json
 
 {
-    "name": "Queijo",
-    "price": 1.00,
-    "kindOfProduct": "rest-of-the-day",
-    "complement": true
-}
-
-###
-
-GET http://localhost:5000/api/products/5df545dc0eb9b606b6a24e92
-
-###
-
-PUT http://localhost:5000/api/products/5df545730eb9b606b6a24e91
-Content-Type: application/json
-
-{
     "name": "Café americano",
-    "price": 5.00,
-    "kindOfProduct": "breakfast"
+    "price": "5.00",
+    "kindOfProduct": "breakfast",
+    "complement": false
 }
-
-###
-
-DELETE http://localhost:5000/api/products/5df92f390c53d90d37d057d6
