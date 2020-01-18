@@ -9,8 +9,11 @@ Essa API, que será parte do projeto Burger Queen, foi criada com:
 * Express
 * MongoDB
 * NodeJS
+* JWT (Jason Web Token - autenticação)
+* bcrypt (encriptação de senhas)
+* multer (armazenamento de imagens no servidor)
 
-Os testes com a API foram realizados com uma extensão do Visual Studio Code chamada REST Client.
+Os testes com a API foram realizados com uma extensão do Visual Studio Code chamada REST Client e com o programa Postman.
 
 A API apresenta as seguintes rotas:
 
@@ -18,7 +21,7 @@ A API apresenta as seguintes rotas:
 
 [x] `GET /`
 
-[x] `/auth` (Essa rota de autenticação na verdade está na rota de usuários)
+[x] `/auth` 
 
 [x] `POST /auth`
 
