@@ -30,36 +30,13 @@ const upload = multer(
     fileFilter: fileFilter
 });
 
-router.get('/', (req, res, next) => {
-  Product.find()
-  .select('name price productImage kindOfProduct complement _id')
-  .exec()
-  .then(docs => {
-      const response = {
-        count: docs.length,
-        products: docs.map(doc => {
-          return {
-            _id: doc._id,
-            name: doc.name,
-            price: doc.price,
-            productImage: doc.productImage,
-            kindOfProduct: doc.kindOfProduct,
-            complement: doc.complement,
-            request: {
-              type: 'GET',
-              url: `http://localhost:5000/api/products/${doc._id}`
-            }
-          }
-        })
-      }
-      res.status(200).json(response)
-  })
-  .catch(err => {
-    console.log(err)
-    res.status(500).json({
-      error: err
-    })
-  });
+router.get('/', async (req, res, next) => {
+  try {
+      const products = await Product.find().select('name price productImage kindOfProduct complement')
+      res.json(products)
+  } catch (err) {
+      res.status(500).json({ message: err.message })
+  }
 });
 
 router.post('/', auth, upload.single('productImage'), (req, res, next) => {
