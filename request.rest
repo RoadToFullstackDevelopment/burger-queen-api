@@ -1,9 +1,16 @@
-POST http://localhost:5000/api/products
+GET http://localhost:5000/api/products
+
+###
+
+POST  http://localhost:5000/api/complement
 Content-Type: application/json
 
 {
-    "name": "Café americano",
-    "price": "5.00",
-    "kindOfProduct": "breakfast",
-    "complement": false
+    "name": "Queijo",
+    "price": 1.00,
+    "complement": true
 }
+
+###
+
+DELETE http://localhost:5000/api/products/5e21c1d1952a72080e986261

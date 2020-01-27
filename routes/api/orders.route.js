@@ -1,45 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const auth = require('../auth');
+// const auth = require('../auth');
 const Product = require('../../models/product.model');
 const Order = require('../../models/order.model');
 
-router.get('/', auth, (req, res, next) => {
-  Order.find()
-  .select('product quantity waiterName clientName orderReady timePreparation orderServed _id')
-  .populate('product')
-  .exec()
-  .then(docs => {
-      res.status(200).json({
-        count: docs.length,
-        orders: docs.map(doc => {
-          return {
-            _id: doc._id,
-            product: doc.productid,
-            quantity: doc.quantity,
-            waiterName: doc.waiterName,
-            clientName: doc.clientName,
-            orderReady: doc.orderReady,
-            timePreparation: doc.timePreparation,
-            orderServed: doc.orderServed,
-            request: {
-              type: 'GET',
-              url: `http://localhost:5000/api/orders/${doc._id}`
-            }
-          }
-        })
-      })
-  })
-  .catch(err => {
-    console.log(err)
-    res.status(500).json({
-      error: err
-    })
-  });
+router.get('/', async (req, res, next) => {
+  try {
+      const order = await Order.find().select('_id productid quantity waiterName clientName timePreparation orderServed orderReady')
+      res.json(order)
+  } catch (err) {
+      res.status(500).json({ message: err.message })
+  }
 });
 
-router.post('/', auth, (req, res, next) => {
+router.post('/', (req, res, next) => {
   Product.findById(req.body.productid)
     .then(product => {
       if (!product) {
@@ -85,7 +60,7 @@ router.post('/', auth, (req, res, next) => {
     });
 });
 
-router.get('/:orderid', auth, (req, res, next) => {
+router.get('/:orderid', (req, res, next) => {
   Order.findById(req.params.orderid)
   .populate('product')
   .exec()
@@ -104,14 +79,14 @@ router.get('/:orderid', auth, (req, res, next) => {
   });
 });
 
-router.put('/:orderid', auth, (req, res, next) => {
+router.put('/:orderid', (req, res, next) => {
   res.status(200).json({
     message: 'Order updated',
     orderid: req.params.orderid
   })
 });
 
-router.delete('/:orderid', auth, (req, res, next) => {
+router.delete('/:orderid', (req, res, next) => {
   Order.deleteOne({_id: req.params.orderid})
     .exec()
     .then(result => {
